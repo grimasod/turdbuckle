@@ -1,133 +1,185 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Spline+Sans%3Awght%40400%3B500%3B700"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>#000000</title>
-    <link type="image/x-icon" rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHklEQVQ4T2NkYGD4z0ABYBw1gGE0DBhGw4BhWIQBAE5OEAELnjVHAAAAAElFTkSuQmCC">
-    <style>
-        :root {
-            --color: #000000;
-            --color-transparent: #00000022;
-        }
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
-        ::selection {
-            background: var(--color-transparent);
-        }
-
-        html,
-        body {
-            background: var(--color);
-            height: 100%;
-            margin: 0;
-        }
-
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        #color {
-            background: white;
-            color: var(--color);
-            font-size: 2.5rem;
-            font-weight: 300;
-            padding: 2.25rem 3rem;
-            font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-            cursor: text;
-        }
-    </style>
-</head>
-
-<body>
-    <p id="color">#000000</p>
-    <script>
-        function randomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-
-        function hslToHex(h, s, l) {
-            h /= 360;
-            s /= 100;
-            l /= 100;
-            var r = void 0,
-                g = void 0,
-                b = void 0;
-            if (s === 0) {
-                r = g = b = l; // achromatic
-            } else {
-                var hue2rgb = function hue2rgb(p, q, t) {
-                    if (t < 0) t += 1;
-                    if (t > 1) t -= 1;
-                    if (t < 1 / 6) return p + (q - p) * 6 * t;
-                    if (t < 1 / 2) return q;
-                    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-                    return p;
-                };
-                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-                var p = 2 * l - q;
-                r = hue2rgb(p, q, h + 1 / 3);
-                g = hue2rgb(p, q, h);
-                b = hue2rgb(p, q, h - 1 / 3);
-            }
-            var toHex = function toHex(x) {
-                var hex = Math.round(x * 255).toString(16);
-                return hex.length === 1 ? '0' + hex : hex;
-            };
-            return '#' + toHex(r) + toHex(g) + toHex(b);
-        }
-
-        window.onload = function () {
-            let stopProp = function (ev) {
-                ev.stopPropagation();
-            }
-
-            var colorElement = document.getElementById("color");
-            colorElement.addEventListener("click", stopProp, false);
-            colorElement.addEventListener("mousedown", stopProp, false);
-
-            var setFavicon = function (hex) {
-                var canvas = document.createElement('canvas');
-                canvas.width = 16;
-                canvas.height = 16;
-                var ctx = canvas.getContext('2d');
-                ctx.fillStyle = hex;
-                ctx.fillRect(0, 0, 16, 16);
-                document.getElementsByTagName('link')[0].href = canvas.toDataURL("image/x-icon");
-            }
-
-            var setRandomColor = function setRandomColor() {
-                var h = void 0,
-                    s = void 0,
-                    l = void 0;
-
-                h = randomInt(0, 359);
-                s = randomInt(55, 75);
-                l = randomInt(40, 60);
-
-                document.documentElement.style.setProperty('--color', 'hsl(' + h + ', ' + s + '%, ' + l + '%)');
-                var hex = hslToHex(h, s, l);
-                document.title = hex;
-                colorElement.innerHTML = hex;
-                document.documentElement.style.setProperty('--color-transparent', hex + '22');
-
-                setFavicon(hex);
-            };
-            setRandomColor();
-
-            var body = document.getElementsByTagName("body")[0];
-            body.addEventListener("mousedown", function (ev) {
-                ev.preventDefault();
-            });
-            body.addEventListener("click", function () {
-                setRandomColor();
-            }, false);
-        };
-    </script>
-</body>
-
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf9f8] group/design-root overflow-x-hidden" style='font-family: "Spline Sans", "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="@container">
+              <div class="@[480px]:p-4">
+                <div
+                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
+                  style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqAaKsycwbPVJQ0-hfdMbXG40y15Y74QqhIfnb8rnnPvgCCR4MukCXIIsnSd-3qFmPcD4CPleQ_1o5FPlIIh5_EMmPO1hlABwyCZz1b3HUiKqiDPPvgKJmNmxRGZCvdtIt259TD1Y66GwIj59YrefwS55ssxi3aiCNPgPSWSZ5nRPtoQ3YAw3F6znU8p0RVZU8MA49UmvIi7bZf-f1XMEYHgG61V8SiUsmobc_NwGSYi4coMiOqHwbnn8p1Bk7Hoa46RjSoSinWCBw");'
+                >
+                  <div class="flex flex-col gap-2 text-center">
+                    <h1
+                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+                    >
+                      Introducing Turdbuckle: The Ultimate Solution for Untimely Excretion
+                    </h1>
+                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                      Are you tired of those unexpected moments when nature calls, but there's no restroom in sight? Fear no more! Turdbuckle is here to save the day (and your
+                      pants).
+                    </h2>
+                  </div>
+                  <button
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#ec5700] text-[#fcf9f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
+                  >
+                    <span class="truncate">Pre-order Now</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#1d120c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">What is Turdbuckle?</h2>
+            <p class="text-[#1d120c] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
+              Turdbuckle is a revolutionary device designed to prevent untimely excretion, especially during diarrhea when restrooms are unavailable. It's like a jockstrap for your
+              digestive system, providing peace of mind and preventing embarrassing situations.
+            </p>
+            <h2 class="text-[#1d120c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">How it works</h2>
+            <p class="text-[#1d120c] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
+              Anyone who has ever engaged in any &quot;butt stuff&quot; will know about the phenomenon where external pressure on the anal sphincter instantly halts all internal movement.
+              The Turdbuckle works in the exact same way - a small protrusion exerts just enough pressure to ensure that all business is put on hold.
+            </p>
+            <h2 class="text-[#1d120c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Key Features</h2>
+            <div class="flex flex-col gap-10 px-4 py-10 @container">
+              <div class="flex flex-col gap-4">
+                <p class="text-[#1d120c] text-base font-normal leading-normal max-w-[720px]">Turdbuckle offers a range of features to ensure your peace of mind.</p>
+              </div>
+              <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
+                <div class="flex flex-1 gap-3 rounded-lg border border-[#ead7cd] bg-[#fcf9f8] p-4 flex-col">
+                  <div class="text-[#1d120c]" data-icon="Shield" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M208,40H48A16,16,0,0,0,32,56v58.77c0,89.61,75.82,119.34,91,124.39a15.53,15.53,0,0,0,10,0c15.2-5.05,91-34.78,91-124.39V56A16,16,0,0,0,208,40Zm0,74.79c0,78.42-66.35,104.62-80,109.18-13.53-4.51-80-30.69-80-109.18V56l160,0Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <h2 class="text-[#1d120c] text-base font-bold leading-tight">Unbreakable Defense</h2>
+                    <p class="text-[#a16745] text-sm font-normal leading-normal">Turdbuckle's robust design ensures maximum protection against leaks and accidents.</p>
+                  </div>
+                </div>
+                <div class="flex flex-1 gap-3 rounded-lg border border-[#ead7cd] bg-[#fcf9f8] p-4 flex-col">
+                  <div class="text-[#1d120c]" data-icon="Lock" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-68-56a12,12,0,1,1-12-12A12,12,0,0,1,140,152Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <h2 class="text-[#1d120c] text-base font-bold leading-tight">Secure and Reliable</h2>
+                    <p class="text-[#a16745] text-sm font-normal leading-normal">Our patented locking mechanism keeps everything in place, no matter the situation.</p>
+                  </div>
+                </div>
+                <div class="flex flex-1 gap-3 rounded-lg border border-[#ead7cd] bg-[#fcf9f8] p-4 flex-col">
+                  <div class="text-[#1d120c]" data-icon="Leaf" data-size="24px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M223.45,40.07a8,8,0,0,0-7.52-7.52C139.8,28.08,78.82,51,52.82,94a87.09,87.09,0,0,0-12.76,49c.57,15.92,5.21,32,13.79,47.85l-19.51,19.5a8,8,0,0,0,11.32,11.32l19.5-19.51C81,210.73,97.09,215.37,113,215.94q1.67.06,3.33.06A86.93,86.93,0,0,0,162,203.18C205,177.18,227.93,116.21,223.45,40.07ZM153.75,189.5c-22.75,13.78-49.68,14-76.71.77l88.63-88.62a8,8,0,0,0-11.32-11.32L65.73,179c-13.19-27-13-54,.77-76.71,22.09-36.47,74.6-56.44,141.31-54.06C210.2,114.89,190.22,167.41,153.75,189.5Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <h2 class="text-[#1d120c] text-base font-bold leading-tight">Comfortable and Discreet</h2>
+                    <p class="text-[#a16745] text-sm font-normal leading-normal">Made with soft, breathable materials, Turdbuckle is comfortable enough for all-day wear.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#1d120c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Use Cases</h2>
+            <div class="flex flex-col gap-10 px-4 py-10 @container">
+              <div class="flex flex-col gap-4">
+                <p class="text-[#1d120c] text-base font-normal leading-normal max-w-[720px]">Turdbuckle is perfect for any situation where restrooms are not readily available.</p>
+              </div>
+              <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBxLM_X7FVLoLW4AN2smPp-sxqSEmBoHYVt6uNsia3oFhM2zEH0s9IGm_kgxNyOWUJc542yanE-KgazWNjCyPf0nJaV3jOcSS3jAeiHd42w-1aZT6WiNJuOVezoqVPgePxRWydcNu2wyJXOhNN9340bCtiJsQ1jmI_zIGkuLuRQsFuaDAibsbuWCvFAB5KIp0wgEEo45TbUff_frZy66MWGhnPySxzUmd3X9374paLEip2DCmYVKxnXZQ72U5wzpmvzsOM0hhBhMIdq");'
+                  ></div>
+                  <div>
+                    <p class="text-[#1d120c] text-base font-medium leading-normal">Hiking and Outdoor Activities</p>
+                    <p class="text-[#a16745] text-sm font-normal leading-normal">
+                      Don't let nature's call ruin your outdoor adventures. Turdbuckle provides reliable protection when restrooms are scarce.
+                    </p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_LD3uHk_wX_PMTIG0BJjKa7vwLvwwoeaYDsn0zgoVwYsFQECYWkGMOb49pVfE6Qp4-bE-g3cnRhjlkIgr-00poBFkQJLf38_M0G5KL7vRB4_NACuZx42GLxEyNXYzwInIvidxA6nlKaIAVfep8jd_tSb_NPMic8hEGwbXa-jVJx9LQr-DeFRy5p_FzKrJlWYmr3JZKNvhlMbADEcLCehpBPbhMyyOWhJ68Ndc7T7YtB28Rgj1BsChlg8TO2y9wgr8MFFg4_DCTi0R");'
+                  ></div>
+                  <div>
+                    <p class="text-[#1d120c] text-base font-medium leading-normal">Concerts and Festivals</p>
+                    <p class="text-[#a16745] text-sm font-normal leading-normal">Enjoy your favorite music without worrying about unexpected bathroom emergencies.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9Ps3gw_WxxKxkDXNF81v7Y1uakUs-UMa3Cj2mjjne0CyARjDe1V4vyHDQUjHCZh0Eyr2t2d0irZnQcQORMZG-j-ACg2K7smzBXnO1h4hGOiFJkLv0efbdqY0QcMH0qvU4jO7R21pcykVUsTXJMzGoaPFolDvdsDugSZz3rIRFSC3nFAlJEiRkLPomqfLXMjZg64XUvizvgWKap-jCvUzOgUmVhkSltNdcKCZEGlqw_9Nzps90qs9bApvehfnZTYZduFIWocTp5xxE");'
+                  ></div>
+                  <div>
+                    <p class="text-[#1d120c] text-base font-medium leading-normal">Long Road Trips</p>
+                    <p class="text-[#a16745] text-sm font-normal leading-normal">Stay comfortable and confident on long drives, knowing you're protected.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <p class="text-[#a16745] text-sm font-normal leading-normal">Turdbuckle is perfect for any situation where restrooms are not readily available.</p>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#1d120c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Invest or Pre-order</h2>
+            <p class="text-[#1d120c] text-base font-normal leading-normal pb-3 pt-1 px-4 text-center">
+              Be a part of the Turdbuckle revolution! Invest in our groundbreaking product or pre-order yours today and experience the freedom of worry-free living.
+            </p>
+            <div class="flex justify-center">
+              <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 max-w-[480px] justify-center">
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-[#ec5700] text-[#fcf9f8] text-base font-bold leading-normal tracking-[0.015em] grow"
+                >
+                  <span class="truncate">Invest Now</span>
+                </button>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-[#f4ebe6] text-[#1d120c] text-base font-bold leading-normal tracking-[0.015em] grow"
+                >
+                  <span class="truncate">Pre-order</span>
+                </button>
+              </div>
+            </div>
+            <h2 class="text-[#1d120c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Patent Application Schematics</h2>
+            <div class="flex w-full grow bg-[#fcf9f8] @container p-4">
+              <div class="w-full gap-1 overflow-hidden bg-[#fcf9f8] @[480px]:gap-2 aspect-[3/2] rounded-xl grid grid-cols-[2fr_1fr_1fr]">
+                <div
+                  class="w-full bg-center bg-no-repeat bg-cover aspect-auto rounded-none row-span-2"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJNa2Dm3LXIziFkrGzyTJN94RUjP7mKncfY3nBJjKc4ndU-0J5zpe0ZTzl_ZX3Uh3qFk5diOsq8rJjJLspyKeVEaOSa0Soa-eSyu--yIkP8UDM__w3EntIr7_46roGplq16X5xrU2U5Q6lHXIYmr2--E1DhMv51QFfcGr_G_BixZIE772SJF0cLPomNuefZ193TolHDOphagHxPzhtPxmfbHCYrNiPvU6WgNi4ikmVPLUjmD_gCz9djtJ_BSITQ_KYg0CfJinXxv93");'
+                ></div>
+                <div
+                  class="w-full bg-center bg-no-repeat bg-cover aspect-auto rounded-none col-span-2 row-span-2"
+                  style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAwnOp8hd3Yyxb57Obze3wU9SnlhWDPeL0N9BGkK6trl2gglWOvICWnl9Ul1UUNw2RmJTWUY26L-r2XtJOk3xTPD93y6AWOf-bNaKz8pk0zNzQRCz51TcPd6u0v7PEmE5_fAHGLyJre9RDAib8TFqS2U38a4yNXEKvD9VICj4DpEbZ6r8i-aFlp-3Oy11yyJlp7vcKxlAnrkFJUrptc753Ae2hpBzrlwobWrgELO0y6K2I55FJ37PWgYekhTR3NkKZK6yrd44SrlQpK");'
+                ></div>
+              </div>
+            </div>
+            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
+              <p class="text-[#a16745] text-base font-normal leading-normal">Copyright Davey &amp; Dave</p>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
